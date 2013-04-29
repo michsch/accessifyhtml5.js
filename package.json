@@ -1,0 +1,44 @@
+{
+  "name": "accessifyhtml5.js",
+  "description": "accessifyhtml5.js",
+  "version": "2.0.0",
+  "homepage": "https://github.com/michsch/accessifyhtml5.js",
+  "forked": "https://github.com/yatil/accessifyhtml5.js",
+  "author": {
+    "name": "Eric Eggert, Michael Schulze (module)"
+  },
+  "licenses": [{
+    "type": "MIT license",
+    "url": "https://github.com/michsch/accessifyhtml5.js/blob/master/MIT.txt"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:michsch/accessifyhtml5.js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/michsch/accessifyhtml5.js/issues"
+  },
+  "engines": {
+    "node": ">=0.8.0"
+  },
+  "scripts": {
+    "test": "grunt qunit --verbose"
+  },
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-coffee": "~0.4.0rc7",
+    "grunt-contrib-connect": "latest",
+    "grunt-contrib-jshint": "latest",
+    "grunt-contrib-uglify": "~0.1.1rc6",
+    "grunt-contrib-watch": "~0.1.4",
+    "grunt-string-replace": "~0.2.3",
+    "jQuery": ">=1.7.4"
+  },
+  "devDependencies": {
+  },
+  "keywords": ["plugin"],
+  "engine": {
+    "node": ">=0.8"
+  }
+}
