@@ -46,52 +46,27 @@ module.exports = function(grunt) {
     },
     jshint: {
       options: {
-        curly: true,
-        eqeqeq: true,
-        immed: false,
-        latedef: true,
-        newcap: true,
-        noarg: true,
-        sub: true,
-        undef: true,
-        boss: true,
-        eqnull: true,
-        browser: true,
-        jquery: true,
-        globals: {}
+        jshintrc: 'module/.jshintrc'
       },
-      grunt: {
+      gruntfile: {
         options: {
-          node: true,
-          strict : true,
-          globals: {
-            module: true
-          }
+          jshintrc: '.jshintrc'
         },
-        files: {
-          src: ['Gruntfile.js']
-        }
+        src: [ 'Gruntfile.js' ]
       },
       original: {
-        files: {
-          src: [
-            'accessifyhtml5.jquery.js',
-            'accessifyhtml5.js'
-          ]
-        }
+        src: [
+          'accessifyhtml5.jquery.js',
+          'accessifyhtml5.js'
+        ]
       },
       module: {
         options: {
-          globals: {
-            define: true,
-            module: true
-          }
+          jshintrc: 'module/.jshintrc'
         },
-        files: {
-          src: [
-            'module/accessifyhtml5.js'
-          ]
-        }
+        src: [
+          'module/accessifyhtml5.js'
+        ]
       },
       test: {
         files: {
@@ -121,14 +96,15 @@ module.exports = function(grunt) {
   });
 
   // Load grunt-compass plugin
-  grunt.loadNpmTasks('grunt-contrib-coffee');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-string-replace');
+  grunt.loadNpmTasks( 'grunt-contrib-coffee' );
+  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
+  grunt.loadNpmTasks( 'grunt-contrib-uglify' );
+  grunt.loadNpmTasks( 'grunt-contrib-watch' );
+  grunt.loadNpmTasks( 'grunt-string-replace' );
+
+  grunt.registerTask( 'comment', [ 'string-replace:comment' ]);
 
   grunt.registerTask( 'module', [
-      'string-replace:comment',
       'coffee',
       'jshint:module',
       'uglify'

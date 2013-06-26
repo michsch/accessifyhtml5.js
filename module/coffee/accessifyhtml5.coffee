@@ -7,7 +7,7 @@
 ###
 
 ###*
- * accessifyhtml5.js - v2.0.0 - 2013-06-26
+ * accessifyhtml5.js - v2.0.1 - 2013-06-26
  * https://github.com/michsch/accessifyhtml5.js
  * original: https://github.com/yatil/accessifyhtml5.js
  * Copyright (c) 2013 Eric Eggert, Michael Schulze (AMD wrapper); Licensed MIT license 
@@ -24,16 +24,16 @@
     define factory
   # register as jQuery plugin
   else if typeof root.jQuery is 'function'
-    root.jQuery[sr] = factory()
+    root.jQuery[sr.toLowerCase()] = factory()
   # Browser
   else
     root[sr] = factory()
 
   true
-) ( typeof window is 'object' and window ) || this, ->
+) ( typeof window is 'object' and window ) or @, ->
   "use strict"
 
-  AccessifyHTML5 = ( defaults, more_fixes ) ->
+  ( defaults, more_fixes ) ->
     fixes =
       article:
         role: 'article'
@@ -100,6 +100,4 @@
                 elems[i].setAttribute attr, value  unless elems[i].hasAttribute(attr)
             i++
     true
-
-  AccessifyHTML5
-, 'accessifyhtml5'
+, 'AccessifyHTML5'

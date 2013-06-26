@@ -1,0 +1,14 @@
+{
+  "name" : "accessifyhtml5-amd",
+  "version" : "2.0.1",
+  "main" : "./module/accessifyhtml5.js",
+  "ignore" : [
+    ".editorconfig",
+    ".gitignore",
+    ".jshintrc",
+    "Gruntfile.js",
+    "package.json"
+  ],
+  "dependencies" : {
+  }
+}
