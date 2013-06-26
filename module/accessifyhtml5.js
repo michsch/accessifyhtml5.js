@@ -8,7 +8,7 @@
 */
 
 /**
- * accessifyhtml5.js - v2.0.0 - 2013-06-26
+ * accessifyhtml5.js - v2.0.1 - 2013-06-26
  * https://github.com/michsch/accessifyhtml5.js
  * original: https://github.com/yatil/accessifyhtml5.js
  * Copyright (c) 2013 Eric Eggert, Michael Schulze (AMD wrapper); Licensed MIT license
@@ -21,16 +21,14 @@
   } else if (typeof define === 'function' && define.amd) {
     define(factory);
   } else if (typeof root.jQuery === 'function') {
-    root.jQuery[sr] = factory();
+    root.jQuery[sr.toLowerCase()] = factory();
   } else {
     root[sr] = factory();
   }
   return true;
 })((typeof window === 'object' && window) || this, function() {
   "use strict";
-
-  var AccessifyHTML5;
-  AccessifyHTML5 = function(defaults, more_fixes) {
+  return function(defaults, more_fixes) {
     var ATTR_SECURE, Doc, ID_PREFIX, attr, by_match, el_label, elems, fix, fixes, i, key, mo, n_label, obj, value;
     fixes = {
       article: {
@@ -124,5 +122,4 @@
     }
     return true;
   };
-  return AccessifyHTML5;
-}, 'accessifyhtml5');
+}, 'AccessifyHTML5');
