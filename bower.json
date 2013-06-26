@@ -7,7 +7,9 @@
     ".gitignore",
     ".jshintrc",
     "Gruntfile.js",
-    "package.json"
+    "package.json",
+    "test",
+    "module/coffee"
   ],
   "dependencies" : {
   }
