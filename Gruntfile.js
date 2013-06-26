@@ -1,35 +1,9 @@
 module.exports = function(grunt) {
   "use strict";
 
-  var tasks, gruntConfig;
-
-  // define tasks
-  // files to watch
-  tasks = {
-    files : [
-      'Gruntfile.js',
-      'module/coffee/**/*.coffee'
-    ]
-  };
-
-  tasks.module = {
-    name: 'module',
-    tasks: [
-      'string-replace:comment',
-      'coffee',
-      'jshint:module',
-      'uglify'
-    ]
-  };
-
-  if (tasks.module.files === void 0) {
-    tasks.module.files = tasks.files;
-  }
-
   // Project configuration.
-  gruntConfig = {
+  grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    // Project metadata, used by some directives, helpers and tasks.
     meta: {
       banner: '<%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") + "\\n" %>' +
@@ -57,7 +31,7 @@ module.exports = function(grunt) {
       options: {
         bare: true
       },
-      glob_to_multiple: {
+      module: {
         expand: true,
         cwd: 'module/coffee/',
         src: [ '**/*.coffee' ],
@@ -137,23 +111,29 @@ module.exports = function(grunt) {
     },
     watch: {
       module: {
-        files: tasks.module.files,
-        tasks: tasks.module.tasks
+        files: [
+          'Gruntfile.js',
+          'module/coffee/**/*.coffee'
+        ],
+        tasks: 'module'
       }
     }
-  };
+  });
 
-  grunt.initConfig( gruntConfig );
-
-    // Load grunt-compass plugin
+  // Load grunt-compass plugin
   grunt.loadNpmTasks('grunt-contrib-coffee');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-string-replace');
 
-  grunt.registerTask(tasks.module.name, tasks.module.tasks);
+  grunt.registerTask( 'module', [
+      'string-replace:comment',
+      'coffee',
+      'jshint:module',
+      'uglify'
+  ]);
 
   // Default task.
-  grunt.registerTask('default', 'watch:' + tasks.module.name);
+  grunt.registerTask('default', 'watch:module');
 };

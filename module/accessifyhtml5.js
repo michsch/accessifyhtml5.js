@@ -1,29 +1,29 @@
 /**jshint
 */
 
-/**globals
- * define,
- * jQuery,
- * module
+/* global
+  define,
+  exports,
+  module
 */
 
 /**
- * accessifyhtml5.js - v2.0.0 - 2013-04-29
+ * accessifyhtml5.js - v2.0.0 - 2013-06-26
  * https://github.com/michsch/accessifyhtml5.js
  * original: https://github.com/yatil/accessifyhtml5.js
- * Copyright (c) 2013 Eric Eggert, Michael Schulze (module); Licensed MIT license
+ * Copyright (c) 2013 Eric Eggert, Michael Schulze (AMD wrapper); Licensed MIT license
 */
 
-(function(root, factory, name) {
+(function(root, factory, sr) {
   "use strict";
   if (typeof exports === 'object') {
     module.exports = factory();
   } else if (typeof define === 'function' && define.amd) {
-    define(factory());
-  } else if (typeof jQuery === 'function' && jQuery) {
-    jQuery[name] = factory();
+    define(factory);
+  } else if (typeof root.jQuery === 'function') {
+    root.jQuery[sr] = factory();
   } else {
-    root[name] = factory();
+    root[sr] = factory();
   }
   return true;
 })((typeof window === 'object' && window) || this, function() {

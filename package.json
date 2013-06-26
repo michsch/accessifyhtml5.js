@@ -5,7 +5,7 @@
   "homepage": "https://github.com/michsch/accessifyhtml5.js",
   "forked": "https://github.com/yatil/accessifyhtml5.js",
   "author": {
-    "name": "Eric Eggert, Michael Schulze (module)"
+    "name": "Eric Eggert, Michael Schulze (AMD wrapper)"
   },
   "licenses": [{
     "type": "MIT license",

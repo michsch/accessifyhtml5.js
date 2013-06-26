@@ -1,19 +1,19 @@
 ###*jshint
 ###
-###*globals
- * define,
- * jQuery,
- * module
+### global
+  define,
+  exports,
+  module
 ###
 
 ###*
- * accessifyhtml5.js - v2.0.0 - 2013-04-29
+ * accessifyhtml5.js - v2.0.0 - 2013-06-26
  * https://github.com/michsch/accessifyhtml5.js
  * original: https://github.com/yatil/accessifyhtml5.js
- * Copyright (c) 2013 Eric Eggert, Michael Schulze (module); Licensed MIT license 
+ * Copyright (c) 2013 Eric Eggert, Michael Schulze (AMD wrapper); Licensed MIT license 
 ###
 
-( ( root, factory, name ) ->
+( ( root, factory, sr ) ->
   "use strict"
 
   # CommonJS
@@ -21,16 +21,16 @@
     module.exports = factory()
   # AMD
   else if typeof define is 'function' and define.amd
-    define factory()
+    define factory
   # register as jQuery plugin
-  else if typeof jQuery is 'function' && jQuery
-    jQuery[name] = factory()
+  else if typeof root.jQuery is 'function'
+    root.jQuery[sr] = factory()
   # Browser
   else
-    root[name] = factory()
+    root[sr] = factory()
 
   true
-)( ( typeof window is 'object' and window ) || this, () ->
+) ( typeof window is 'object' and window ) || this, ->
   "use strict"
 
   AccessifyHTML5 = ( defaults, more_fixes ) ->
@@ -102,4 +102,4 @@
     true
 
   AccessifyHTML5
-, 'accessifyhtml5' )
+, 'accessifyhtml5'
