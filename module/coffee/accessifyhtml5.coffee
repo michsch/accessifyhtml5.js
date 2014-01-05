@@ -78,6 +78,7 @@
         # ..Or concatenate - the default.
         for mo of more_fixes
           fixes[mo] = more_fixes[mo]
+
       for fix of fixes
         continue  if fix.match(/^_(CONFIG|[A-Z]+)_/) # Silently ignore.
         if fixes.hasOwnProperty(fix)
@@ -137,7 +138,7 @@
                       sel: fix
                       attr: attr
                       val: value
-                      msg: 'Invalid selector syntax (2) - see 'val''
+                      msg: "Invalid selector syntax (2) - see 'val'"
                       ex: ex
 
                   unless el_label
@@ -145,7 +146,7 @@
                       sel: fix
                       attr: attr
                       val: value
-                      msg: 'Labelledby ref not found - see 'val''
+                      msg: "Labelledby ref not found - see 'val'"
 
                     continue
                   el_label.id = ID_PREFIX + n_label  unless el_label.id
@@ -158,7 +159,7 @@
                     sel: fix
                     attr: attr
                     val: value
-                    msg: 'Added'
+                    msg: "Added"
 
                 else
                   result.warn.push
