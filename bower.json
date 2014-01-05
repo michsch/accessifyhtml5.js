@@ -1,6 +1,6 @@
 {
   "name" : "accessifyhtml5-amd",
-  "version" : "2.0.1",
+  "version" : "2.0.2",
   "main" : "./module/accessifyhtml5.js",
   "ignore" : [
     ".editorconfig",
