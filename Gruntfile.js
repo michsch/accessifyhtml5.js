@@ -1,28 +1,26 @@
 module.exports = function(grunt) {
-  "use strict";
+  'use strict';
 
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    meta: {
-      banner: '<%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
+    banner: {
+      std: '<%= pkg.title || pkg.name %> - v<%= pkg.version %> - ' +
         '<%= grunt.template.today("yyyy-mm-dd") + "\\n" %>' +
         '<%= pkg.homepage ? " * " + pkg.homepage + "\\n" : "" %>' +
         '<%= pkg.forked ? " * original: " + pkg.forked + "\\n" : "" %>' +
         ' * Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
-        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %>',
-      bannercoffee: '###*\n * <%= meta.banner %> \n###',
-      bannerjs: '/*! <%= meta.banner %> */\n'
+        ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ")%>'
     },
     'string-replace': {
       comment: {
         files: {
-          './': [ 'module/**/*.coffee' ]
+          './': ['module/*.js', '!module/*.min.js']
         },
         options: {
           replacements: [{
-            pattern: /###\*(\n|\r|(\r\n))(.|\n|\r|(\r\n))*###/i,
-            replacement: '<%= meta.bannercoffee %>'
+            pattern: /\(function/i,
+            replacement: '\/* <%= banner.std %>\n *\/\n(function'
           }]
         }
       }
@@ -77,7 +75,7 @@ module.exports = function(grunt) {
     uglify: {
       prod: {
         options : {
-          banner: '<%= meta.bannerjs %>'
+          banner: '<%= banner.std %>'
         },
         files: {
           'module/accessifyhtml5.min.js' : [ 'module/accessifyhtml5.js' ]
@@ -96,20 +94,27 @@ module.exports = function(grunt) {
   });
 
   // Load grunt-compass plugin
-  grunt.loadNpmTasks( 'grunt-contrib-coffee' );
-  grunt.loadNpmTasks( 'grunt-contrib-jshint' );
-  grunt.loadNpmTasks( 'grunt-contrib-uglify' );
-  grunt.loadNpmTasks( 'grunt-contrib-watch' );
-  grunt.loadNpmTasks( 'grunt-string-replace' );
+  grunt.loadNpmTasks('grunt-banner');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-string-replace');
 
-  grunt.registerTask( 'comment', [ 'string-replace:comment' ]);
+  grunt.registerTask('comment', ['string-replace:comment']);
 
-  grunt.registerTask( 'module', [
+  grunt.registerTask('module', [
       'coffee',
+      'comment',
       'jshint:module',
       'uglify'
   ]);
 
   // Default task.
-  grunt.registerTask('default', 'watch:module');
+  grunt.registerTask('default', ['module']);
+
+  grunt.registerTask('travis', [
+    'jshint:module',
+    'uglify'
+  ]);
 };

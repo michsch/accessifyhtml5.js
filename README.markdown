@@ -1,3 +1,13 @@
+[![Release](http://img.shields.io/github/release/michsch/accessifyhtml5.js.svg?style=flat)](https://github.com/michsch/accessifyhtml5.js/releases)
+[![Issues](http://img.shields.io/github/issues/michsch/accessifyhtml5.js.svg?style=flat)](https://github.com/michsch/accessifyhtml5.js/issues)
+
+---
+
+[![Build Status](http://img.shields.io/travis/michsch/accessifyhtml5.js/master.svg?style=flat)](https://travis-ci.org/michsch/accessifyhtml5.js)
+[![Code Climate](http://img.shields.io/codeclimate/github/michsch/accessifyhtml5.js.svg?style=flat)](https://codeclimate.com/github/michsch/accessifyhtml5.js)
+[![devDependency Status](http://img.shields.io/david/dev/michsch/accessifyhtml5.js.svg?style=flat)](https://david-dm.org/michsch/accessifyhtml5.js#info=devDependencies)
+[![Built with Grunt](http://img.shields.io/badge/built_with-grunt-yellow.svg?style=flat)](http://gruntjs.com/)
+
 # accessifyhtml5.js
 
 The polyfill for a more accessible HTML5.

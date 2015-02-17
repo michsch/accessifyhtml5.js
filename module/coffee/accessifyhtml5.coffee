@@ -1,39 +1,25 @@
-###*jshint
-###
-### global
-  define,
-  exports,
-  module
-###
-
-###*
- * accessifyhtml5.js - v2.0.2 - 2014-01-05
- * https://github.com/michsch/accessifyhtml5.js
- * original: https://github.com/yatil/accessifyhtml5.js
- * Copyright (c) 2013 Eric Eggert, Michael Schulze (AMD wrapper); Licensed MIT license
-###
-
-( ( root, factory, sr ) ->
+### global define, exports, module ###
+((root, factory, name) ->
   'use strict'
 
-  # CommonJS
-  if typeof exports is 'object'
-    module.exports = factory()
   # AMD
-  else if typeof define is 'function' and define.amd
+  if typeof define == 'function' and define.amd
     define factory
+  # CommonJS
+  else if typeof exports == 'object'
+    module.exports = factory()
   # register as jQuery plugin
-  else if typeof root.jQuery is 'function'
-    root.jQuery[sr.toLowerCase()] = factory()
+  else if typeof root.jQuery == 'function'
+    root.jQuery[name.toLowerCase()] = factory()
   # Browser
   else
-    root[sr] = factory()
+    root[name] = factory()
 
-  true
-) ( typeof window is 'object' and window ) or @, ->
+  return
+) (typeof window == 'object' and window) or @, ->
   'use strict'
 
-  ( defaults, more_fixes ) ->
+  (defaults, more_fixes) ->
     fixes =
       article:
         role: 'article'
@@ -57,7 +43,11 @@
 
     error = result.fail
 
-    ATTR_SECURE = new RegExp('aria-[a-z]+|role|tabindex|title|alt|data-[\\w-]+|lang|' + 'style|maxlength|placeholder|pattern|required|type|target|accesskey|longdesc')
+    ATTR_SECURE = new RegExp(
+      'aria-[a-z]+|role|tabindex|title|alt|data-[\\w-]+|lang|' +
+      'style|maxlength|placeholder|pattern|required|type|target|accesskey|longdesc'
+    )
+
     ID_PREFIX = 'acfy-id-'
     n_label = 0
     Doc = document
@@ -71,10 +61,11 @@
           fixes.main = role: ''
 
       # Either replace fixes...
-      if more_fixes and more_fixes._CONFIG_ and more_fixes._CONFIG_.ignore_defaults
+      if more_fixes and
+      more_fixes._CONFIG_ and
+      more_fixes._CONFIG_.ignore_defaults
         fixes = more_fixes
       else
-
         # ..Or concatenate - the default.
         for mo of more_fixes
           fixes[mo] = more_fixes[mo]
@@ -128,7 +119,8 @@
 
                   continue
 
-                # Connect up 'aria-labelledby'. //Question: do we accept poor spelling/ variations?
+                # Connect up 'aria-labelledby'.
+                # Question: do we accept poor spelling/ variations?
                 by_match = attr.match(/(describ|label)l?edby/)
                 if by_match
                   try
@@ -151,8 +143,10 @@
                     continue
                   el_label.id = ID_PREFIX + n_label  unless el_label.id
                   value = el_label.id
-                  attr = 'aria-' + ((if 'label' is by_match[1] then 'labelledby' else 'describedby'))
+                  attr = 'aria-' +
+                    ((if 'label' is by_match[1] then 'labelledby' else 'describedby'))
                   n_label++
+
                 unless elems[i].hasAttribute(attr)
                   elems[i].setAttribute attr, value
                   result.ok.push
