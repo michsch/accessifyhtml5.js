@@ -8,3 +8,5 @@ Thumbs.db
 *copy.*
 *error.*
 _scratch
+
+*node_modules
